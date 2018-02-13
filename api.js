@@ -13,23 +13,24 @@ const ConfigBase = (url, method, baseURL) => ({
   baseURL
 });
 
-async function handleMessage(sender_psid, received_message) {
+function handleMessage(sender_psid, received_message) {
 
   let response;
 
   // Check if the message contains text
   if (received_message.text) {
 
-    const username = await getUserName(sender_psid);
-
-    // Create the payload for a basic text message
-    response = {
-      "text": `${username}: ${received_message.text}`
-    }
+    // const username = await getUserName(sender_psid);
+    getUserName(sender_psid)
+    .then(username => {
+      // Create the payload for a basic text message
+      response = {
+        "text": `${username.data.first_name}: ${received_message.text}`
+      }
+      // Sends the response message
+      callSendAPI(sender_psid, response);
+    });
   }
-
-  // Sends the response message
-  callSendAPI(sender_psid, response);
 }
 
 // Handles messaging_postbacks events
@@ -37,10 +38,11 @@ function handlePostback(sender_psid, received_postback) {
 
 }
 
-async function getUserName(sender_psid) {
+function getUserName(sender_psid) {
   const config = ConfigBase(`${sender_psid}?fields=first_name&access_token=${PAGE_ACCESS_TOKEN}`, 'get', baseURL);
-  const profile = await axios(config);
-  return profile.data.first_name;
+  return axios(config);
+  // const profile = await axios(config);
+  // return profile.data.first_name;
 }
 
 // Sends response messages via the Send API
