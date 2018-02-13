@@ -29,10 +29,10 @@ const _http = http.createServer(app);
 const _https = https.createServer(options, app);
 
 const httpPort = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 80;
-const httpsPort = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 443;
+// const httpsPort = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 443;
 
 _http.listen(httpPort, () => console.log(`Listening on: ${_http.address().port}`));
-_https.listen(httpsPort, () => console.log(`Listening on: ${_https.address().port}`));
+// _https.listen(httpsPort, () => console.log(`Listening on: ${_https.address().port}`));
 
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
