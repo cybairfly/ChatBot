@@ -26,7 +26,7 @@ const
   app = express().use(bodyParser.json()); // creates express http server
 
 const _http = http.createServer(app);
-const _https = https.createServer(options, app);
+// const _https = https.createServer(options, app);
 
 const httpPort = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 80;
 // const httpsPort = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 443;
