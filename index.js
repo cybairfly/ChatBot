@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+// const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 const options = {
     key: fs.readFileSync( './ssl/private.key' ),
@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  // let VERIFY_TOKEN = "";
+  let VERIFY_TOKEN = "Cryptolaemusmontrouzieri";
 
   // Parse the query params
   let mode = req.query['hub.mode'];
